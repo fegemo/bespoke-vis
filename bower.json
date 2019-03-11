@@ -1,0 +1,11 @@
+{
+  "name": "bespoke-math",
+  "version": "1.2.0",
+  "main": "./dist/bespoke-math.min.js",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "bespoke.js": ">=1.0.0"
+  }
+}

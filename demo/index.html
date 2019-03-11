@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <title>bespoke-vis demo</title>
+    <style media="screen">
+      h1 {
+        margin-bottom: 0.25em;
+      }
+      h2 {
+        margin-top: 0;
+      }
+
+      pre {
+        background-color: silver;
+        border-radius: 4px;
+        border: 1px solid white;
+        padding: 0.3em 0.5em;
+      }
+      pre > code {
+        font-size: 0.75em;
+        line-height: 1em;
+      }
+      .scrollbars {
+        overflow-y: scroll;
+      }
+
+      dl {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+      }
+      dt {
+        flex-basis: 20%;
+        padding: 0.15em 0.5em;
+        text-align: right;
+        color: purple;
+      }
+      dd {
+        flex-basis: 70%;
+        flex-grow: 1;
+        margin: 0;
+        padding: 0.15em 0.5em;
+      }
+
+      #vis-types {
+        width: 500px;
+        margin-left: auto;
+      }
+
+      #data-in-markup {
+        height: 205px;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="cube">
+      <section>
+        <h1>bespoke-vis</h1>
+        <p>This plugin allows including
+          <strong><a href="http://visjs.org/">visjs</a> elements</strong> in
+          bespoke presentations.
+        </p>
+        <ul>
+          <li>There are 4 types of visualizations:
+            <dl id="vis-types">
+              <dt><code>timeline</code></dt>
+              <dd>a timeline of events</dd>
+              <dt><code>network</code></dt>
+              <dd>a graph</dd>
+              <dt><code>lines</code></dt>
+              <dd>a lines chart</dd>
+              <dt><code>bars</code></dt>
+              <dd>a vertical bars chart</dd>
+            </dl>
+          </li>
+          <li>There are 2 ways of including such an element:
+            <ol>
+              <li>Loading the data from a JSON file (slides 2-3)</li>
+              <li>Loading the data from the HTML markup (slides 4-5)</li>
+            </ol>
+          </li>
+          <li>
+            See how to use bespoke-vis in both ways in the next slides
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h1>Loading data from a <strong>JSON file</strong></h1>
+        <ul>
+          <li>
+            Source code:
+            <pre><code>&lt;div data-vis="timeline" data-vis-url="data.json"&gt;&lt;div&gt;</code></pre>
+          </li>
+          <li>
+            Result:
+            <div data-vis="timeline" data-vis-url="data.json">
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h1>Loading data from a <strong>JSON file</strong></h1>
+        <h2>The JSON file (<code>data.json</code>)</h2>
+        <pre class="scrollbars"><code>{
+  "groups": [
+    { "id": 1, "content": "Group 1" },
+    { "id": 2, "content": "Group 2" }
+  ],
+  "items": [
+     { "group": 1, "content": "Item G1.1", "start": "2020-01-01", "type": "point" },
+     { "group": 1, "content": "Item G1.2", "start": "2021-01-01", "type": "point" },
+     { "group": 2, "content": "Item G2.1", "start": "2022-01-01", "type": "point" }
+   ],
+   "options": {
+     "width": "100%",
+     "height": "250px",
+     "min": "2019-01-01",
+     "max": "2023-01-01",
+     "zoomMin": 2592000000,
+     "zoomMax": 788400000000
+   }
+ }</code></pre>
+        <ul>
+          <li>Properties:
+            <dl>
+              <dt><code>options</code></dt>
+              <dd>[optional] a set of configurations from visjs</dd>
+              <dt><code>groups</code></dt>
+              <dd>[optional] any grouping of the items (may be mandatory)</dd>
+              <dt><code>items</code></dt>
+              <dd>[mandatory] an array of items to display</dd>
+            </dl>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h1>Loading data in the markup</h1>
+        <ul>
+          <li>Source code:
+            <pre class="scrollbars" id="data-in-markup"><code>&lt;div data-vis="timeline"&gt;
+  {
+    "options": {
+      "height": "200px",
+      "width": "700px"
+    },
+    "items": [
+      { "content": "OpenGL 1.0", "start": "1992-01-01" },
+      { "content": "OpenGL 2.0", "start": "2004-01-01" },
+      { "content": "OpenGL 3.0", "start": "2008-01-01" }
+    ]
+  }
+&lt;div&gt;</code></pre>
+          </li>
+          <li>
+            Result:
+            <div data-vis="timeline">
+              {
+                "options": {
+                  "height": "200px",
+                  "width": "700px"
+                },
+                "items": [
+                  { "content": "OpenGL 1.0", "start": "1992-01-01" },
+                  { "content": "OpenGL 2.0", "start": "2004-01-01" },
+                  { "content": "OpenGL 3.0", "start": "2008-01-01" }
+                ]
+              }
+            </div>
+          </li>
+        </ul>
+      </section>
+    </article>
+
+    <script src="demo.bundled.js"></script>
+  </body>
+</html>
